@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="utf-8" />
+    <title>TG App</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <h1>Test</h1>
+    <div id="app" class="app">
+      <div>🧑<span id="userName">?</span></div>
+      <div>💎<span id="balance">?</span></div>
+      <button id="button" onclick="onDrop()">📥</button>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const app_id = "[🍒 test_html]";
+    let balanceComponent = null;
+    let balance = 0;
+
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log(app_id + " запустилось тестовая страница с ", app_id);
+      const app = window.Telegram.WebApp;
+
+      app.ready();
+
+      if (!app.isExpanded) {
+        app.expand(); // $ExpectType void
+      }
+      var initData = app.initDataUnsafe;
+      var userId = initData.user.id;
+      var userName = initData.user.username;
+      setBalance(777);
+      setUserName(userName);
+    });
+
+    function setBalance(value) {
+      if (balanceComponent === null)
+        balanceComponent = document.getElementById("balance");
+      balance = value;
+      balanceComponent.innerHTML = balance;
+    }
+    function setUserName(value) {
+      let component = document.getElementById("userName");
+      component.innerHTML = value;
+    }
+  </script>
+</html>
